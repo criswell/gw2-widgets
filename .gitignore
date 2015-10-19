@@ -1,0 +1,17 @@
+*.mo
+*.egg-info
+*.egg
+*.EGG
+*.EGG-INFO
+*.pyc
+*.pyo
+bin
+build
+develop-eggs
+downloads
+eggs
+fake-eggs
+parts
+dist
+my.json
+output/
