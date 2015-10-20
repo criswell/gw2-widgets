@@ -2,18 +2,21 @@
 
 from gw2api import GW2_API
 from datastore import DataStore
+from render import Render
 
 class Colors:
     __borg_state = {}
     __account_colors_id = "account_colors"
+    __color_id = "colors"
 
     def __init__(self, config):
         self.__dict__ = self.__borg_state
         self.config = config
         self.api = GW2_API(config)
         self.ds = DataStore(config)
+        self.render = Render(config)
 
-    def colorize(self):
+    def colorize(self, filename):
         """Generate the embedded pages pertaining to an account's colors"""
 
         # Start by getting all the colors this account has
@@ -38,8 +41,11 @@ class Colors:
             listings_by_id[l['item']] = l
         temp_dyes = self.api.get_with_limit("items",
                 { "ids" : [c['item'] for c in temp_colors] }, "ids", 200)
-        dye_by_id = {}
+        data = {}
         for d in temp_dyes:
             dye_by_id[d['id']] = d
 
+
+
         # Finally, render
+        self.render.render(self.__color_id, filename, data)

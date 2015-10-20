@@ -2,6 +2,9 @@
   "api-key" : "XXXX-XXXX-XXX-XXXX",
   "data-store" : "/some/path/to/a/data/directory",
   "output-dir" : "/some/path/to/where/output/html/goes",
+  "template-dirs" : [
+    "/some/path/to/where/your/templates/are/found"
+  ],
   "make" : [
     {
       "type" : "colors",
