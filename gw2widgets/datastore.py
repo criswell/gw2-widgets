@@ -18,12 +18,15 @@ class DataStore:
     def get(self, store_id):
         """Given a store ID, get the data from data storage."""
         data = {}
-        with open(self.fname(store_id), 'r' as f):
-            data = json.load(f)
+        try:
+            with open(self.fname(store_id), 'r') as f:
+                data = json.load(f)
+        except EnvironmentError:
+            pass # It's a no op, it means the file isn't made
 
         return data
 
     def put(self, store_id, data):
         """Given a store ID, put data into data storage"""
-        with open(self.fname(store_id), 'w' as f):
+        with open(self.fname(store_id), 'w') as f:
             json.dump(data, f)
