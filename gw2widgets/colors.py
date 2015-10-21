@@ -3,6 +3,7 @@
 from gw2api import GW2_API
 from datastore import DataStore
 from render import Render
+import datetime
 
 class Colors:
     __borg_state = {}
