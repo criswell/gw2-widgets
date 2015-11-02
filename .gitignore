@@ -15,3 +15,4 @@ parts
 dist
 my.json
 output/
+data/
