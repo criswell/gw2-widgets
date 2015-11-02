@@ -5,6 +5,7 @@
   "template-dirs" : [
     "/some/path/to/where/your/templates/are/found"
   ],
+  "source-dir" : "/some/path/to/your/main/source/templates",
   "make" : [
     {
       "type" : "colors",

@@ -3,6 +3,7 @@
 from gw2api import GW2_API
 from datastore import DataStore
 from render import Render
+#import sys, pprint
 
 class Colors:
     __borg_state = {}
@@ -34,18 +35,55 @@ class Colors:
         listings = self.api.get_with_limit("commerce/listings",
                 { "ids" :  [c['item'] for c in temp_colors] }, "ids", 200)
         colors_by_id = {}
+        colors_by_set = {}
         for c in temp_colors:
             colors_by_id[c['item']] = c
+            cat = c['categories'][-1]
+            if cat not in colors_by_set:
+                colors_by_set[cat] = []
+            colors_by_set[cat].append(c['item'])
         listings_by_id = {}
         for l in listings:
-            listings_by_id[l['item']] = l
-        temp_dyes = self.api.get_with_limit("items",
-                { "ids" : [c['item'] for c in temp_colors] }, "ids", 200)
+            listings_by_id[l['id']] = l
+        #temp_dyes = self.api.get_with_limit("items",
+        #        { "ids" : [c['item'] for c in temp_colors] }, "ids", 200)
         data = {}
-        for d in temp_dyes:
-            dye_by_id[d['id']] = d
+        color_library = {}
+        total_value = 0
+        #dye_by_id = {}
+        #for d in temp_dyes:
+        #    dye_by_id[d['id']] = d
 
+        for rarity in colors_by_set.keys():
+            if rarity not in color_library:
+                color_library[rarity] = []
 
+            colors_by_set[rarity].sort()
+            #print rarity
+            #print colors_by_set[rarity]
+            for c in colors_by_set[rarity]:
+                #print colors_by_id[c]
+                cost = 0
+                if c in listings_by_id:
+                    cost = listings_by_id[c]['sells'][0]['unit_price']
+                color_library[rarity].append({
+                        "dye" : colors_by_id[c],
+                        "price" : cost
+                        })
+                total_value += cost
+                #print cost
+
+        data = {
+            'colors' : color_library,
+            'value' : total_value
+            }
+
+        #print listings_by_id
+        #print colors_by_id
+        #print dye_by_id
+        #pp = pprint.PrettyPrinter(indent=2)
+        #pp.pprint(colors_by_set)
+        #sys.exit()
 
         # Finally, render
         self.render.render(self.__color_id, filename, data)
