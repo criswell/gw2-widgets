@@ -11,4 +11,4 @@ if len(sys.argv) < 2:
 cfile = sys.argv[1]
 
 c = colors.Colors(config.load_config(cfile))
-c.colorize("test.html")
+print(c.colorize())

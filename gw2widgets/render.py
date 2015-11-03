@@ -56,7 +56,6 @@ class Render:
     def __init__(self, config):
         self.__dict__ = self.__borg_state
         self.config = config
-        self.output = self.config['output-dir']
         self.source = self.config['source-dir']
         self.env = Environment(extensions=[PrintCoin])
         self.env.loader = FileSystemLoader(self.config['template-dirs'])
@@ -67,18 +66,15 @@ class Render:
             'copper' : self.api.get_one("files", { 'ids' : 'ui_coin_copper' })
             }
 
-    def render(self, page_id, filename, data):
+    def render(self, page_id, data):
         """Render a page
 
         Params:
             page_id  = The page ID for the page to generate
-            filename = The output filename (sans path)
             data     = The data for the page
         """
         with open("{0}/{1}.html".format(self.source, page_id),
                 "r") as tf:
             raw_template = ''.join(tf.readlines())
             template = self.env.from_string(raw_template)
-            rendered = template.render(data=data, coin_img=self.coins)
-            with open("{0}/{1}".format(self.output, filename), 'w') as of:
-                of.write(rendered)
+            return template.render(data=data, coin_img=self.coins)

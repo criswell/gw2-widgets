@@ -17,7 +17,7 @@ class Colors:
         self.ds = DataStore(config)
         self.render = Render(config)
 
-    def colorize(self, filename):
+    def colorize(self):
         """Generate the embedded pages pertaining to an account's colors"""
 
         # Start by getting all the colors this account has
@@ -92,4 +92,4 @@ class Colors:
             }
 
         # Finally, render
-        self.render.render(self.__color_id, filename, data)
+        return self.render.render(self.__color_id, data)
