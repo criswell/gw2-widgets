@@ -4,14 +4,62 @@
     <title>Sample output</title>
     <meta http-equiv='content-type' content='text/html;charset=utf-8' />
     <style type="text/css">
-      body, html {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        background: #202020;
-        color: #CCD7DB;
-        font-family: Futura,Trebuchet MS,Arial,sans-serif;
+      /* The following is an example of CSS that could be used with this
+         widget set. It contains all elements in use. */
+      html {
+        min-height: 100%;
+        box-sizing: border-box;
+        position: relative;
+      }
+
+      body {
+        color: black;
+        background-color: #ffd79e;
+        font-family: Verdana, Arial, Helvetica;
+        font-size: 0.85em;
+        background-color: #ffd79e;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        padding-bottom: 6rem;
+      }
+
+      .widget_color_rarity {
+        color: #230331;
+        font-variant: small-caps;
+        text-shadow: 1px 1px 0 #e0e0e0,
+        0px 0px 3px #240333;
+        font-size: 1.75em;
+      }
+      .widget_color_list {
+        width: 80%;
+        display: inherit;
+        padding-bottom: 1rem;
+      }
+      .widget_color_rarity_list {
+        margin: 0 auto;
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
+      }
+      .widget_color_rarity_list li {
+        float: left;
+        padding: .2em 1em;
+        text-align: center;
+      }
+      .widget_color_entry {
+        position: relative;
+      }
+      .widget_color_square_cloth,
+      .widget_color_square_leather,
+      .widget_color_square_metal {
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        background-color: #ccc;
+        left: 5px;
+        top: 5px;
       }
     </style>
   </head>
