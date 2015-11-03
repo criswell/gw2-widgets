@@ -54,9 +54,13 @@ class Colors:
         #for d in temp_dyes:
         #    dye_by_id[d['id']] = d
 
+        rarities = []
+
         for rarity in colors_by_set.keys():
             if rarity not in color_library:
                 color_library[rarity] = []
+            if rarity not in rarities:
+                rarities.append(rarity)
 
             colors_by_set[rarity].sort()
             #print rarity
@@ -73,9 +77,28 @@ class Colors:
                 total_value += cost
                 #print cost
 
+        # Hackish way to ensure we sort rarities right
+        rarities_sorted = []
+        if "Starter" in rarities:
+            rarities_sorted.append("Starter")
+            rarities.remove("Starter")
+        if "Common" in rarities:
+            rarities_sorted.append("Common")
+            rarities.remove("Common")
+        if "Uncommon" in rarities:
+            rarities_sorted.append("Uncommon")
+            rarities.remove("Uncommon")
+        if "Rare" in rarities:
+            rarities_sorted.append("Rare")
+            rarities.remove("Rare")
+        if len(rarities) > 0:
+            rarities.sort()
+            rarities_sorted.extend(rarities)
+
         data = {
             'colors' : color_library,
-            'value' : total_value
+            'value' : total_value,
+            'rarities' : rarities_sorted
             }
 
         #print listings_by_id

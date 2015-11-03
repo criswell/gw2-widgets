@@ -1,3 +1,11 @@
-<ul class="colors">
-  {% coins 4819 %}
+{% for rarity in data.rarities %}
+<ul class="widget_color_list">
+  <li><div class="widget_color_rarity">{{ rarity }}</div>
+    <ul>
+    {% for color in data.colors[rarity] %}
+      <li>{{ color.dye.name }}{% coins color.price %}</li>
+    {% endfor %}
+    </ul>
+  </li>
 </ul>
+{% endfor %}

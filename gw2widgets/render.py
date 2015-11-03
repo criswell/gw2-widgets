@@ -26,9 +26,9 @@ class PrintCoin(Extension):
 
     def _to_coins(self, coins):
         return (
-                '{0}'.format(a)[:-4],
-                '{0}'.format(a)[-4:-2],
-                '{0}'.format(a)[-2:])
+                '{0}'.format(coins)[:-4],
+                '{0}'.format(coins)[-4:-2],
+                '{0}'.format(coins)[-2:])
 
     def _print_coins(self, value, coin_img, caller):
         r = ""
