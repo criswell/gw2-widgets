@@ -34,6 +34,18 @@ class GW2_API:
                 headers=self.__header)
         return r.json()
 
+    def get_one(self, endpoint, params={}):
+        """GW2 Rest API get method for obtaining only one result.
+
+        Params:
+            endpoint = The API endpoint
+            params   = A dict containing the parameters to use
+        """
+        r = self.get(endpoint, params)
+        if type(r) is list:
+            r = r[0]
+        return r
+
     def get_with_limit(self, endpoint, params={}, key=None, limit=200):
         """GW2 Rest API get method, with limit.
 
