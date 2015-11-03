@@ -10,5 +10,19 @@ if len(sys.argv) < 2:
 
 cfile = sys.argv[1]
 
-c = colors.Colors(config.load_config(cfile))
-print(c.colorize())
+header = ''
+with open("sample/header.html", "r") as h:
+    header = ''.join(h.readlines())
+footer = ''
+with open("sample/footer.html", "r") as f:
+    footer = ''.join(f.readlines())
+
+cfg = config.load_config(cfile)
+outdir = cfg['output-dir']
+
+# Start with colors
+c = colors.Colors(cfg)
+color_html = c.colorize()
+
+with open("{0}/colors.html".format(outdir), "w") as cf:
+    cf.write("{0}{1}{2}".format(header, color_html, footer))
