@@ -45,17 +45,11 @@ class Colors:
         listings_by_id = {}
         for l in listings:
             listings_by_id[l['id']] = l
-        #temp_dyes = self.api.get_with_limit("items",
-        #        { "ids" : [c['item'] for c in temp_colors] }, "ids", 200)
         data = {}
         color_library = {}
         total_value = 0
-        #dye_by_id = {}
-        #for d in temp_dyes:
-        #    dye_by_id[d['id']] = d
 
         rarities = []
-
         for rarity in colors_by_set.keys():
             if rarity not in color_library:
                 color_library[rarity] = []
@@ -63,10 +57,7 @@ class Colors:
                 rarities.append(rarity)
 
             colors_by_set[rarity].sort()
-            #print rarity
-            #print colors_by_set[rarity]
             for c in colors_by_set[rarity]:
-                #print colors_by_id[c]
                 cost = 0
                 if c in listings_by_id:
                     cost = listings_by_id[c]['sells'][0]['unit_price']
@@ -75,7 +66,6 @@ class Colors:
                         "price" : cost
                         })
                 total_value += cost
-                #print cost
 
         # Hackish way to ensure we sort rarities right
         rarities_sorted = []
@@ -100,13 +90,6 @@ class Colors:
             'value' : total_value,
             'rarities' : rarities_sorted
             }
-
-        #print listings_by_id
-        #print colors_by_id
-        #print dye_by_id
-        #pp = pprint.PrettyPrinter(indent=2)
-        #pp.pprint(colors_by_set)
-        #sys.exit()
 
         # Finally, render
         self.render.render(self.__color_id, filename, data)

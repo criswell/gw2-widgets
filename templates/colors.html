@@ -1,9 +1,36 @@
 {% for rarity in data.rarities %}
 <ul class="widget_color_list">
   <li><div class="widget_color_rarity">{{ rarity }}</div>
-    <ul>
+    <ul class="widget_color_rarity_list">
     {% for color in data.colors[rarity] %}
-      <li>{{ color.dye.name }}{% coins color.price %}</li>
+      <li><div class="widget_color_square_cloth" style="
+          background: rgb({{ color.dye.cloth.rgb[0] }},
+                          {{ color.dye.cloth.rgb[1] }},
+                          {{ color.dye.cloth.rgb[2] }});
+          border-style: solid;
+          border-width: 1px;
+          border-color: rgb({{ color.dye.base_rgb[0] }},
+                            {{ color.dye.base_rgb[1] }},
+                            {{ color.dye.base_rgb[2] }});">
+        </div><div class="widget_color_square_leather" style="
+          background: rgb({{ color.dye.leather.rgb[0] }},
+                          {{ color.dye.leather.rgb[1] }},
+                          {{ color.dye.leather.rgb[2] }});
+          border-style: solid;
+          border-width: 1px;
+          border-color: rgb({{ color.dye.base_rgb[0] }},
+                            {{ color.dye.base_rgb[1] }},
+                            {{ color.dye.base_rgb[2] }});">
+        </div><div class="widget_color_square_metal" style="
+          background: rgb({{ color.dye.metal.rgb[0] }},
+                          {{ color.dye.metal.rgb[1] }},
+                          {{ color.dye.metal.rgb[2] }});
+          border-style: solid;
+          border-width: 1px;
+          border-color: rgb({{ color.dye.base_rgb[0] }},
+                            {{ color.dye.base_rgb[1] }},
+                            {{ color.dye.base_rgb[2] }});">
+        </div>{{ color.dye.name }} {% coins color.price %}</li>
     {% endfor %}
     </ul>
   </li>
