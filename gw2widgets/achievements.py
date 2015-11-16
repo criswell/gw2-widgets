@@ -25,9 +25,9 @@ class Achievements:
 
         return cheeves_by_id
 
-    def _get_new_cheeves(self, old_cheeves, new_cheeves):
+    def _get_new_unlock_cheeves(self, old_cheeves, new_cheeves):
         """Given a dict of old and new Achievements, find those that are
-        newly completed."""
+        newly unlocked."""
 
         unlocks = []
         for cheeve in new_cheeves:
