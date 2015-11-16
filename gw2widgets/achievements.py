@@ -27,13 +27,32 @@ class Achievements:
 
     def _get_new_unlock_cheeves(self, old_cheeves, new_cheeves):
         """Given a dict of old and new Achievements, find those that are
-        newly unlocked."""
+        newly unlocked.
+
+        Returns a tuple of:
+            (unlocks, newness) where
+                    -unlocks is newly completed cheeves
+                    -newness is new added cheeves
+        """
 
         unlocks = []
+        newness = []
         for cheeve in new_cheeves:
-            if cheeve.done != old_cheeves[cheeve.id].done:
+            if cheeve['id'] not in old_cheeves:
+                newness.append(cheeve)
+            elif cheeve['done'] != old_cheeves[cheeve['id']]['done']:
                 unlocks.append(cheeve)
-        return unlocks
+        return (unlocks, newness)
+
+    def _get_new_progress_cheeves(self, old_cheeves, new_cheeves):
+        """Given a dict of old and new Achievements, find those that have
+        new progress on them."""
+
+        new_prog = []
+        for cheeve in new_cheeves:
+            if cheeve.get('current', 0) != \
+                    old_cheeves[cheeve['id']].get('current', 0):
+                new_prog.append(cheeve)
 
     def update(self, cheeves=None):
         """Will update the datastore with the current cheeves. Intended to be
