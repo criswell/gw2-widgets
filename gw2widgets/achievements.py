@@ -6,6 +6,7 @@ from render import Render
 
 class Achievements:
     __borg_state = {}
+    __achievements_id = "account_achievements"
 
     def __init__(self, config):
         self.__dict__ = self.__borg_state
@@ -33,3 +34,14 @@ class Achievements:
             if cheeve.done != old_cheeves[cheeve.id].done:
                 unlocks.append(cheeve)
         return unlocks
+
+    def update(self, cheeves=None):
+        """Will update the datastore with the current cheeves. Intended to be
+        called once per day, per week, per cycle (whatever).
+
+        If 'cheeves' is ommitted, will get the current cheevese via API"""
+
+        if cheeves is None:
+            cheeves = self._get_current()
+
+        self.ds.put(self.__achievements_id, cheeves)
